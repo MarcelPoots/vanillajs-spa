@@ -2,132 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vanilla JS SPA – Improved</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
-
-    body {
-      display: flex;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    nav {
-      width: 220px;
-      background: #2c3e50;
-      color: white;
-      padding: 20px;
-    }
-
-    nav ul { list-style: none; }
-    nav li { margin-bottom: 12px; }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      display: block;
-      padding: 6px 8px;
-      border-radius: 4px;
-    }
-
-    nav a.active {
-      background: #34495e;
-      font-weight: bold;
-    }
-
-    main {
-      flex: 1;
-      padding: 24px;
-      animation: fade 0.25s ease-in-out;
-    }
-
-    @keyframes fade {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vanilla JS SPA</title>
 </head>
 <body>
-  <nav>
-    <ul>
-      <li><a href="/" data-route="/">Home</a></li>
-      <li><a href="/about" data-route="/about">About</a></li>
-      <li><a href="/contact" data-route="/contact">Contact</a></li>
-    </ul>
-  </nav>
-
+  <app-menu></app-menu>
   <main id="app"></main>
 
-  <script>
-    /*****************************
-     * 1. COMPONENTS
-     *****************************/
-    const Home = () => `
-      <h1>Home</h1>
-      <p>Welcome to the improved vanilla JS SPA.</p>
-    `;
-
-    const About = () => `
-      <h1>About</h1>
-      <p>This version uses pushState, components, and transitions.</p>
-    `;
-
-    const Contact = () => `
-      <h1>Contact</h1>
-      <p>Email us at <strong>contact@example.com</strong>.</p>
-    `;
-
-    const NotFound = () => `
-      <h1>404</h1>
-      <p>Page not found.</p>
-    `;
-
-    /*****************************
-     * 2. ROUTER CONFIG
-     *****************************/
-    const routes = {
-      '/': Home,
-      '/about': About,
-      '/contact': Contact
-    };
-
-    const app = document.getElementById('app');
-    const links = document.querySelectorAll('nav a');
-
-    /*****************************
-     * 3. ROUTER LOGIC (pushState)
-     *****************************/
-    function navigate(path) {
-      history.pushState({}, '', path);
-      render();
-    }
-
-    function render() {
-      const path = location.pathname;
-      const page = routes[path] || Home;
-      app.innerHTML = page();
-      setActiveLink(path);
-    }
-
-    function setActiveLink(path) {
-      links.forEach(link => {
-        link.classList.toggle('active', link.dataset.route === path);
-      });
-    }
-
-    /*****************************
-     * 4. EVENT HANDLING
-     *****************************/
-    links.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        navigate(link.getAttribute('href'));
-      });
-    });
-
-    window.addEventListener('popstate', render);
-    render();
-  </script>
+  <script type="module" src="./js/main.js"></script>
 </body>
 </html>

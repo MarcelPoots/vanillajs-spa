@@ -1,2 +1,4 @@
- A Singel Page Application with Vanilla JS. 
- 
+# from project root
+npx serve
+# and go to:
+http://localhost:3000/about
